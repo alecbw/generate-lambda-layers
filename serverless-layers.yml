@@ -1,0 +1,34 @@
+# serverless.yml
+
+service: layers-stack
+
+provider:
+  name: aws
+  runtime: python3.7
+  stage: prod
+  region: us-west-1
+  versionFunctions: true
+  tags:
+    deployment: serverless.com
+
+layers:
+  pandas:
+    path: pandas
+    name: Pandas-Numpy
+    description: Pandas 1.0.1 with Python 3.7. Includes Dependencies Numpy (1.13.3) and Pytz (2019.3)
+    retain: true
+    compatibleRuntimes:
+      - python3.7
+    allowedAccounts:
+      - '*' # ALL accounts!
+  social_platform_wrappers:
+    path: social_platform_wrappers
+    name: Twitter-StackOverflow-Reddit
+    description: Python 3.7. tweepy (3.8.0) praw (6.5.1) StackAPI (0.1.12). Includes Dependencies six, certifi, chardet, idna, urllib3, requests, oauthlib, requests-oauthlib, PySocks, update-checker, websocket-client
+    retain: true
+    compatibleRuntimes:
+      - python3.7
+    allowedAccounts:
+      - '*' # ALL accounts!
+      # - ${env:AWS_ACCOUNT_ID}
+

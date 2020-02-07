@@ -1,0 +1,176 @@
+{
+  "service": {
+    "service": "layers-stack",
+    "serviceObject": {
+      "name": "layers-stack"
+    },
+    "provider": {
+      "stage": "prod",
+      "variableSyntax": "\\${([ ~:a-zA-Z0-9._@'\",\\-\\/\\(\\)*]+?)}",
+      "name": "aws",
+      "runtime": "python3.7",
+      "region": "us-west-1",
+      "versionFunctions": true,
+      "remoteFunctionData": null,
+      "compiledCloudFormationTemplate": {
+        "AWSTemplateFormatVersion": "2010-09-09",
+        "Description": "The AWS CloudFormation template for this Serverless application",
+        "Resources": {
+          "ServerlessDeploymentBucket": {
+            "Type": "AWS::S3::Bucket",
+            "Properties": {
+              "BucketEncryption": {
+                "ServerSideEncryptionConfiguration": [
+                  {
+                    "ServerSideEncryptionByDefault": {
+                      "SSEAlgorithm": "AES256"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "PandasLambdaLayer5ef0f938c63d0182233b92cafff8531d12815cd5": {
+            "Type": "AWS::Lambda::LayerVersion",
+            "Properties": {
+              "Content": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/layers-stack/prod/1581053419718-2020-02-07T05:30:19.718Z/pandas.zip"
+              },
+              "LayerName": "Pandas-Numpy",
+              "Description": "Pandas 1.0.1 with Python 3.7. Includes Dependencies Numpy (1.13.3) and Pytz (2019.3)",
+              "CompatibleRuntimes": [
+                "python3.7"
+              ]
+            },
+            "DeletionPolicy": "Retain"
+          },
+          "PandasWildLambdaLayerPermission": {
+            "Type": "AWS::Lambda::LayerVersionPermission",
+            "Properties": {
+              "Action": "lambda:GetLayerVersion",
+              "LayerVersionArn": {
+                "Ref": "PandasLambdaLayer5ef0f938c63d0182233b92cafff8531d12815cd5"
+              },
+              "Principal": "*"
+            }
+          },
+          "SocialUnderscoreplatformUnderscorewrappersLambdaLayer6503e6f0532e5139965db6c53565d7f063da59c8": {
+            "Type": "AWS::Lambda::LayerVersion",
+            "Properties": {
+              "Content": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/layers-stack/prod/1581053419718-2020-02-07T05:30:19.718Z/social_platform_wrappers.zip"
+              },
+              "LayerName": "Twitter-StackOverflow-Reddit",
+              "Description": "Python 3.7. tweepy (3.8.0) praw (6.5.1) StackAPI (0.1.12). Includes Dependencies six, certifi, chardet, idna, urllib3, requests, oauthlib, requests-oauthlib, PySocks, update-checker, websocket-client",
+              "CompatibleRuntimes": [
+                "python3.7"
+              ]
+            },
+            "DeletionPolicy": "Retain"
+          },
+          "SocialUnderscoreplatformUnderscorewrappersWildLambdaLayerPermission": {
+            "Type": "AWS::Lambda::LayerVersionPermission",
+            "Properties": {
+              "Action": "lambda:GetLayerVersion",
+              "LayerVersionArn": {
+                "Ref": "SocialUnderscoreplatformUnderscorewrappersLambdaLayer6503e6f0532e5139965db6c53565d7f063da59c8"
+              },
+              "Principal": "*"
+            }
+          }
+        },
+        "Outputs": {
+          "ServerlessDeploymentBucketName": {
+            "Value": {
+              "Ref": "ServerlessDeploymentBucket"
+            }
+          },
+          "PandasLambdaLayerQualifiedArn": {
+            "Description": "Current Lambda layer version",
+            "Value": {
+              "Ref": "PandasLambdaLayer5ef0f938c63d0182233b92cafff8531d12815cd5"
+            }
+          },
+          "SocialUnderscoreplatformUnderscorewrappersLambdaLayerQualifiedArn": {
+            "Description": "Current Lambda layer version",
+            "Value": {
+              "Ref": "SocialUnderscoreplatformUnderscorewrappersLambdaLayer6503e6f0532e5139965db6c53565d7f063da59c8"
+            }
+          }
+        }
+      },
+      "coreCloudFormationTemplate": {
+        "AWSTemplateFormatVersion": "2010-09-09",
+        "Description": "The AWS CloudFormation template for this Serverless application",
+        "Resources": {
+          "ServerlessDeploymentBucket": {
+            "Type": "AWS::S3::Bucket",
+            "Properties": {
+              "BucketEncryption": {
+                "ServerSideEncryptionConfiguration": [
+                  {
+                    "ServerSideEncryptionByDefault": {
+                      "SSEAlgorithm": "AES256"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "Outputs": {
+          "ServerlessDeploymentBucketName": {
+            "Value": {
+              "Ref": "ServerlessDeploymentBucket"
+            }
+          }
+        }
+      }
+    },
+    "pluginsData": {},
+    "functions": {},
+    "serviceFilename": "serverless-layers.yml",
+    "layers": {
+      "pandas": {
+        "path": "pandas",
+        "name": "Pandas-Numpy",
+        "description": "Pandas 1.0.1 with Python 3.7. Includes Dependencies Numpy (1.13.3) and Pytz (2019.3)",
+        "retain": true,
+        "compatibleRuntimes": [
+          "python3.7"
+        ],
+        "allowedAccounts": [
+          "*"
+        ],
+        "package": {
+          "artifact": "/Users/Alec/Documents/Coding/Actual_Programs/Serverless/Layers/.serverless/pandas.zip"
+        }
+      },
+      "social_platform_wrappers": {
+        "path": "social_platform_wrappers",
+        "name": "Twitter-StackOverflow-Reddit",
+        "description": "Python 3.7. tweepy (3.8.0) praw (6.5.1) StackAPI (0.1.12). Includes Dependencies six, certifi, chardet, idna, urllib3, requests, oauthlib, requests-oauthlib, PySocks, update-checker, websocket-client",
+        "retain": true,
+        "compatibleRuntimes": [
+          "python3.7"
+        ],
+        "allowedAccounts": [
+          "*"
+        ],
+        "package": {
+          "artifact": "/Users/Alec/Documents/Coding/Actual_Programs/Serverless/Layers/.serverless/social_platform_wrappers.zip"
+        }
+      }
+    }
+  },
+  "package": {
+    "artifactDirectoryName": "serverless/layers-stack/prod/1581053419718-2020-02-07T05:30:19.718Z",
+    "artifact": ""
+  }
+}
