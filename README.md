@@ -27,4 +27,7 @@ The tweepy (3.8.0) praw (6.5.1) StackAPI (0.1.12) libraries. and dependencies si
 You can fork this and generate new layers by modifying the attached serverless.yml. You'll want to change service name (and region, if applicable) and remove the existing layers.
 
 The bash script contains two position args - `layer_name`, and `no-deps`, the latter of which should be implemented literally and will prevent requirements' dependencies from being installed (helpful if they have large, out-of-the-box dependencies like boto3)
+
 ```bash get_layer_packages.sh layer_name no-deps```
+
+Questions, comments, or concern? Open an issue or email me: alec@contextify.io
