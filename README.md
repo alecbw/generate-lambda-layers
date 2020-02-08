@@ -28,7 +28,7 @@ You can fork this and generate new layers by modifying the attached serverless.y
 
 The bash script contains two positional args - `layer_name`, and `no-deps`, the latter of which should be implemented literally and will prevent requirements' dependencies from being installed (helpful if they have large, out-of-the-box dependencies like boto3)
 
-```bash get_layer_packages.sh layer_name no-deps```
+```bash build_layers.sh layer_name no-deps```
 
 After the libraries are finished installing, you can deploy to AWS with 
 
