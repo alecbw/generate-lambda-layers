@@ -31,6 +31,7 @@ The bash script contains two position args - `layer_name`, and `no-deps`, the la
 ```bash get_layer_packages.sh layer_name no-deps```
 
 After the libraries are finished installing, you can deploy to AWS with 
+
 ```sls deploy --config "serverless-layers.yml"```
 
 Questions, comments, or concern? Open an issue or email me: alec@contextify.io
