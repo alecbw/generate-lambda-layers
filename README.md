@@ -38,4 +38,5 @@ After the libraries are finished installing, you can deploy to AWS with
 
 ```sls deploy --config "serverless-layers.yml"```
 
-Questions, comments, or concern? Open an issue or email me: alec@contextify.io
+
+Questions, comments, or concerns? Open an issue or email me: alec@contextify.io
