@@ -19,5 +19,5 @@ The Pandas Library (1.0.1) and dependencies (Numpy (1.17.3) and Pytz (2019.3))
 - arn:aws:lambda:us-west-1:052077176879:layer:Pandas-Numpy:1
 
 ### Twitter-StackOverflow-Reddit
-tweepy (3.8.0) praw (6.5.1) StackAPI (0.1.12). Includes Dependencies six, certifi, chardet, idna, urllib3, requests, oauthlib, requests-oauthlib, PySocks, update-checker, websocket-client
-      - arn:aws:lambda:us-west-1:052077176879:layer:Twitter-StackOverflow-Reddit:1
+The tweepy (3.8.0) praw (6.5.1) StackAPI (0.1.12) libraries. and dependencies six, certifi, chardet, idna, urllib3, requests, oauthlib, requests-oauthlib, PySocks, update-checker, websocket-client
+- arn:aws:lambda:us-west-1:052077176879:layer:Twitter-StackOverflow-Reddit:1
