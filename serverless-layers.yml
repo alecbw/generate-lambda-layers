@@ -29,6 +29,6 @@ layers:
     compatibleRuntimes:
       - python3.7
     allowedAccounts:
-      - '*' # ALL accounts!
-      # - ${env:AWS_ACCOUNT_ID}
+      - '*'
+      # - ${env:AWS_ACCOUNT_ID} - If you want to limit to your account, export your account_id to env vars and pass it to the .yml file
 
