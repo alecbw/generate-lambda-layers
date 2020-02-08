@@ -24,7 +24,11 @@ The tweepy (3.8.0) praw (6.5.1) StackAPI (0.1.12) libraries. and dependencies si
 
 ## Using this repo
 
-You can fork this and generate new layers by modifying the attached serverless.yml. You'll want to change service name (and region, if applicable) and remove the existing layers.
+You can fork this and generate new layers yourself. 
+
+1) Modify the attached serverless.yml. You'll want to change service name (and region, if applicable) and remove the existing layers.
+2) Create a requirements.txt with the libraries wanted in your layer
+3) Use build_layers.sh to build and sls deploy to deploy your layer.
 
 The bash script contains two positional args - `layer_name`, and `no-deps`, the latter of which should be implemented literally and will prevent requirements' dependencies from being installed (helpful if they have large, out-of-the-box dependencies like boto3)
 
