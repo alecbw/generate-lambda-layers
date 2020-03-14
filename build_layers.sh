@@ -1,15 +1,33 @@
 #!/bin/bash
-if [ "$1" == "" ]
+
+# Display a helper message if the user hasn't provided args
+if [ "$#" == 0 ]
 then
-    echo "You need to pass your LL Name as an argument"
+    echo -e "This script has args: \n '#1' -> Lambda Layer name. \n '#2' -> requirements.txt name (if not default) \n '#3' -> no-deps: will prevent dependencies not specified from being installed. \nPlease try again with the args provided. Exiting."
     exit
 fi
+
+
+if [ "$2" == "requirements.txt" ] || [ "$2" == "" ]
+then
+    REQUIREMENTS_FILENAME="requirements.txt"
+else
+    REQUIREMENTS_FILENAME="$2"
+fi
+
+if [[ ! -f REQUIREMENTS_FILENAME ]]
+    echo -e "The requirements.txt you specified (arg #2) was not found. Exiting."
+    exit
+
+
 
 export PKG_DIR="$1/python/lib/python3.7/site-packages"
 
 rm -rf ${PKG_DIR} && mkdir -p ${PKG_DIR}
 
-if [ "$2" == "no-deps" ]
+
+
+if [ "$3" == "no-deps" ]
 then
     docker run --rm -v "$(pwd):/foo" -w /foo lambci/lambda:build-python3.7 \
     pip install -r requirements.txt --no-deps -t ${PKG_DIR}
