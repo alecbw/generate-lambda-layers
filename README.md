@@ -12,10 +12,15 @@ This repo contains end to end installation, packaging, and deployment of Lambda 
 
 ## Todo 
 [X] Support for custom requirements.txt filenames
+
 [X] Support for deploys from build_layers.sh
+
 [] Update docs to cover newly added Layers
+
 [] Update deploy process to update the descriptions of the LL's so they will be versioned properly
+
 [] Print size of new Layer folder?
+
 
 ## Provided
 
@@ -41,9 +46,11 @@ You can fork this and generate new layers yourself.
 
 The bash script contains two positional args - `layer_name`, and `no-deps`, the latter of which should be implemented literally and will prevent requirements' dependencies from being installed (helpful if they have large, out-of-the-box dependencies like boto3)
 
-```bash build_layers.sh layer_name no-deps```
+```bash build_layers.sh layer_name -no_deps -deploy```
 
-After the libraries are finished installing, you can deploy to AWS with 
+
+
+(You can also manually deploy at any time to AWS with:)
 
 ```sls deploy --config "serverless-layers.yml"```
 
