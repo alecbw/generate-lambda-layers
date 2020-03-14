@@ -31,7 +31,7 @@ The repo contains five pre-built Lambda Layers, which you can attach to any Lamb
 ### Pandas-Numpy
 - arn:aws:lambda:us-west-1:052077176879:layer:Pandas-Numpy:5
 ### Twitter-StackOverflow-Reddit
-- arn:aws:lambda:us-west-1:052077176879:layer:Twitter-StackOverflow-Reddit:1
+- arn:aws:lambda:us-west-1:052077176879:layer:Twitter-StackOverflow-Reddit:5
 ### Requests
  - arn:aws:lambda:us-west-1:052077176879:layer:Requests-BS4:4
 ### Google_Auth
