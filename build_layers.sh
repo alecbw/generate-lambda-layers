@@ -3,7 +3,7 @@
 # Display a helper message if the user hasn't provided args
 if [ "$#" == 0 ]
 then
-    echo -e "This script has args: \n '#1' -> Lambda Layer name. \n '#2' -> requirements.txt name (if not default) \n '#3' -> -no_deps: will prevent dependencies not specified from being installed. \nPlease try again with the args provided. Exiting."
+    echo -e "This script has args: \n '#1' -> Lambda Layer name. \n '#2' -> requirements.txt name (if not default) \n '#3' -> -no_deps: will prevent dependencies not specified from being installed. '#4' -> -deploy: will deploy after building. \nPlease try again with the args provided. Exiting."
     exit
 fi
 
