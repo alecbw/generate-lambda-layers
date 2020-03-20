@@ -38,6 +38,12 @@ else
     pip install -r $REQUIREMENTS_FILENAME -t ${PKG_DIR}
 fi
 
+# You have to change the text of the Layer description for it to version properly
+# This exports the current datetime so it can be added to the description
+TIMESTAMP=`date "+%Y-%m-%d-%H:%M"`
+export SLS_DESCRIPTION_TIMESTAMP="Updated ${TIMESTAMP}"
+
+
 if [ "$3" == "-deploy" ] || [ "$4" == "-deploy" ]
 then
     echo "Make sure you added it to the serverless-layers.yml first!"
