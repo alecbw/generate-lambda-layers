@@ -15,9 +15,9 @@ This repo contains end to end installation, packaging, and deployment of Lambda 
 
 [X] Support for deploys from build_layers.sh
 
-[] Update docs to cover newly added Layers
+[X] Update docs to cover newly added Layers
 
-[] Update deploy process to update the descriptions of the LL's so they will be versioned properly
+[X] Update deploy process to update the descriptions of the LL's so they will be versioned properly
 
 [] Print size of new Layer folder?
 
