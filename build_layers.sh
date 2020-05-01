@@ -7,6 +7,15 @@ then
     exit
 fi
 
+# Check if Docker is running; break if not
+docker_state=$(docker info >/dev/null 2>&1)
+if [[ $? -ne 0 ]]
+then
+    echo -e "This requires Docker. Make sure to enable the Docker daemon first"
+    exit
+fi
+
+
 # Let the user pass a specific requirements filename if they want.
 if [ "$2" == "requirements.txt" ] || [ "$2" == "" ]
 then

@@ -42,7 +42,7 @@ layers:
   google-auth:
     path: google_auth
     name: Google-Auth
-    description: Python 3.7; google-auth (1.6.3), google-auth-oauthlib( 0.4.1), gspread (3.1.0),oauth2client (4.1.3). Also includes dependencies cachetools, certifi, chardet, oauthlib, httplib2, idna, pyasn1, pyasn1-modules, requests, requests-oauthlib, rsa, six, urllib3. - ${env:SLS_DESCRIPTION_TIMESTAMP}
+    description: Python 3.7; google-auth (1.14.1), gspread (3.6.0). Also includes dependencies cachetools, certifi, chardet, oauthlib, httplib2, idna, pyasn1, pyasn1-modules, requests, requests-oauthlib, rsa, six, urllib3. - ${env:SLS_DESCRIPTION_TIMESTAMP}
     retain: true
     compatibleRuntimes:
       - python3.7
