@@ -57,5 +57,23 @@ layers:
       - python3.7
     allowedAccounts:
       - '*'
-      # - ${env:AWS_ACCOUNT_ID} - If you want to limit to your account, export your account_id to env vars and pass it to the .yml file
+  selenium:
+    path: selenium
+    name: Selenium
+    description: Python 3.7; Selenium (3.141.0), ChromeDriver (2.37), Serverless Chrome (v1.0.0.41) - ${env:SLS_DESCRIPTION_TIMESTAMP}
+    retain: true
+    compatibleRuntimes:
+      - python3.7
+    allowedAccounts:
+      - '*'
 
+  # browser-emulation:
+  #   path: browser_emulation
+  #   name: Node-Browser-Emulation
+  #   description: - ${env:SLS_DESCRIPTION_TIMESTAMP}
+  #   retain: true
+  #   compatibleRuntimes:
+  #     - nodejs12.16.3
+  #   allowedAccounts:
+  #     - '*'
+      # - ${env:AWS_ACCOUNT_ID} - If you want to limit to your account, export your account_id to env vars and pass it to the .yml file
