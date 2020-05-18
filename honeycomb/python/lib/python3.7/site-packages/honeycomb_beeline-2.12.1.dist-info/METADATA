@@ -1,0 +1,16 @@
+Metadata-Version: 2.1
+Name: honeycomb-beeline
+Version: 2.12.1
+Summary: Honeycomb library for easy instrumentation
+Home-page: https://github.com/honeycombio/beeline-python
+Author: Honeycomb.io
+Author-email: feedback@honeycomb.io
+License: Apache
+Platform: UNKNOWN
+Requires-Python: >=2.7
+Requires-Dist: libhoney (>=1.7.0)
+Requires-Dist: wrapt
+
+UNKNOWN
+
+

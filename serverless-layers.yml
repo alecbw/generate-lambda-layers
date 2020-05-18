@@ -66,14 +66,12 @@ layers:
       - python3.7
     allowedAccounts:
       - '*'
-
-  # browser-emulation:
-  #   path: browser_emulation
-  #   name: Node-Browser-Emulation
-  #   description: - ${env:SLS_DESCRIPTION_TIMESTAMP}
-  #   retain: true
-  #   compatibleRuntimes:
-  #     - nodejs12.16.3
-  #   allowedAccounts:
-  #     - '*'
-      # - ${env:AWS_ACCOUNT_ID} - If you want to limit to your account, export your account_id to env vars and pass it to the .yml file
+  honeycomb:
+    path: honeycomb
+    name: Honeycomb
+    description: Python 3.7; Honeycomb (2.12.1), Requests (2.23.0), Wrapt (1.12.1), Libhoney (1.9.0), Statsd (3.3.0) - ${env:SLS_DESCRIPTION_TIMESTAMP}
+    retain: true
+    compatibleRuntimes:
+      - python3.7
+    allowedAccounts:
+      - '*'
