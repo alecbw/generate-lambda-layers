@@ -33,7 +33,7 @@ layers:
   requests:
     path: requests
     name: Requests-BS4
-    description: Python 3.7; requests (2.22.0), beautifulsoup4 (4.8.2), gevent (1.4.0), lxml (4.5.0). Includes dependencies urllib3, chardet, certifi, idna, soupsieve, greenlet. - ${env:SLS_DESCRIPTION_TIMESTAMP}
+    description: Python 3.7; requests (2.22.0), beautifulsoup4 (4.8.2), gevent (1.4.0), lxml (4.5.0), langdetect (1.0.8). Includes dependencies urllib3, chardet, certifi, idna, soupsieve, greenlet. - ${env:SLS_DESCRIPTION_TIMESTAMP}
     retain: true
     compatibleRuntimes:
       - python3.7
@@ -42,7 +42,7 @@ layers:
   google-auth:
     path: google_auth
     name: Google-Auth
-    description: Python 3.7; google-auth (1.14.1), gspread (3.6.0). Also includes dependencies cachetools, certifi, chardet, oauthlib, httplib2, idna, pyasn1, pyasn1-modules, requests, requests-oauthlib, rsa, six, urllib3. - ${env:SLS_DESCRIPTION_TIMESTAMP}
+    description: Python 3.7; google-auth (1.14.1), gspread (3.6.0), PyJWT (1.7.1). Also includes dependencies cachetools, certifi, chardet, oauthlib, httplib2, idna, pyasn1, pyasn1-modules, requests, requests-oauthlib, rsa, six, urllib3. - ${env:SLS_DESCRIPTION_TIMESTAMP}
     retain: true
     compatibleRuntimes:
       - python3.7
@@ -66,10 +66,19 @@ layers:
       - python3.7
     allowedAccounts:
       - '*'
-  honeycomb:
-    path: honeycomb
-    name: Honeycomb
-    description: Python 3.7; Honeycomb (2.12.1), Requests (2.23.0), Wrapt (1.12.1), Libhoney (1.9.0), Statsd (3.3.0) - ${env:SLS_DESCRIPTION_TIMESTAMP}
+  monitoring:
+    path: monitoring
+    name: Monitoring
+    description: Python 3.7; Honeycomb (2.12.1) sentry-sdk (0.15.0), Requests (2.23.0), Wrapt (1.12.1), Libhoney (1.9.0), Statsd (3.3.0) - ${env:SLS_DESCRIPTION_TIMESTAMP}
+    retain: true
+    compatibleRuntimes:
+      - python3.7
+    allowedAccounts:
+      - '*'
+  databases:
+    path: databases
+    name: Databases
+    description: Python 3.7; PyMySQL (0.10.0), psycopg2 (2.8.5) - ${env:SLS_DESCRIPTION_TIMESTAMP}
     retain: true
     compatibleRuntimes:
       - python3.7

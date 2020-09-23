@@ -1,0 +1,395 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "The AWS CloudFormation template for this Serverless application",
+  "Resources": {
+    "ServerlessDeploymentBucket": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketEncryption": {
+          "ServerSideEncryptionConfiguration": [
+            {
+              "ServerSideEncryptionByDefault": {
+                "SSEAlgorithm": "AES256"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "ServerlessDeploymentBucketPolicy": {
+      "Type": "AWS::S3::BucketPolicy",
+      "Properties": {
+        "Bucket": {
+          "Ref": "ServerlessDeploymentBucket"
+        },
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:*",
+              "Effect": "Deny",
+              "Principal": "*",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":s3:::",
+                      {
+                        "Ref": "ServerlessDeploymentBucket"
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              ],
+              "Condition": {
+                "Bool": {
+                  "aws:SecureTransport": false
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "MonitoringLambdaLayer76581eb844ece035f21538502452cded967d3459": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "Content": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/layers-stack/prod/1600844397633-2020-09-23T06:59:57.633Z/monitoring.zip"
+        },
+        "LayerName": "Monitoring",
+        "Description": "Python 3.7; Honeycomb (2.12.1) sentry-sdk (0.15.0), Requests (2.23.0), Wrapt (1.12.1), Libhoney (1.9.0), Statsd (3.3.0) - Updated 2020-09-22-23:59",
+        "CompatibleRuntimes": [
+          "python3.7"
+        ]
+      },
+      "DeletionPolicy": "Retain"
+    },
+    "MonitoringWildLambdaLayerPermission": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": {
+          "Ref": "MonitoringLambdaLayer76581eb844ece035f21538502452cded967d3459"
+        },
+        "Principal": "*"
+      }
+    },
+    "SocialUnderscoreplatformUnderscorewrappersLambdaLayerb0c78a81924831195a38070479ef30252488c613": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "Content": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/layers-stack/prod/1600844397633-2020-09-23T06:59:57.633Z/social_platform_wrappers.zip"
+        },
+        "LayerName": "Twitter-StackOverflow-Reddit",
+        "Description": "Python 3.7; tweepy (3.8.0) praw (6.5.1) StackAPI (0.1.12). Includes dependencies six, certifi, chardet, idna, urllib3, requests, oauthlib, requests-oauthlib, PySocks, update-checker, websocket-client. - Updated 2020-09-22-23:59",
+        "CompatibleRuntimes": [
+          "python3.7"
+        ]
+      },
+      "DeletionPolicy": "Retain"
+    },
+    "SocialUnderscoreplatformUnderscorewrappersWildLambdaLayerPermission": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": {
+          "Ref": "SocialUnderscoreplatformUnderscorewrappersLambdaLayerb0c78a81924831195a38070479ef30252488c613"
+        },
+        "Principal": "*"
+      }
+    },
+    "DatabasesLambdaLayer97bddd094578b95ef0d17b8649a8455ccaad2f6a": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "Content": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/layers-stack/prod/1600844397633-2020-09-23T06:59:57.633Z/databases.zip"
+        },
+        "LayerName": "Databases",
+        "Description": "Python 3.7; PyMySQL (0.10.0), psycopg2 (2.8.5) - Updated 2020-09-22-23:59",
+        "CompatibleRuntimes": [
+          "python3.7"
+        ]
+      },
+      "DeletionPolicy": "Retain"
+    },
+    "DatabasesWildLambdaLayerPermission": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": {
+          "Ref": "DatabasesLambdaLayer97bddd094578b95ef0d17b8649a8455ccaad2f6a"
+        },
+        "Principal": "*"
+      }
+    },
+    "GoogleDashauthLambdaLayer56e5741cdbe80707581ed9360be1ffe9b01b4223": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "Content": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/layers-stack/prod/1600844397633-2020-09-23T06:59:57.633Z/google-auth.zip"
+        },
+        "LayerName": "Google-Auth",
+        "Description": "Python 3.7; google-auth (1.14.1), gspread (3.6.0), PyJWT (1.7.1). Also includes dependencies cachetools, certifi, chardet, oauthlib, httplib2, idna, pyasn1, pyasn1-modules, requests, requests-oauthlib, rsa, six, urllib3. - Updated 2020-09-22-23:59",
+        "CompatibleRuntimes": [
+          "python3.7"
+        ]
+      },
+      "DeletionPolicy": "Retain"
+    },
+    "GoogleDashauthWildLambdaLayerPermission": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": {
+          "Ref": "GoogleDashauthLambdaLayer56e5741cdbe80707581ed9360be1ffe9b01b4223"
+        },
+        "Principal": "*"
+      }
+    },
+    "RequestsLambdaLayer5572a2eb37fc53d49d35f79b9f9554b1b22ac5ce": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "Content": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/layers-stack/prod/1600844397633-2020-09-23T06:59:57.633Z/requests.zip"
+        },
+        "LayerName": "Requests-BS4",
+        "Description": "Python 3.7; requests (2.22.0), beautifulsoup4 (4.8.2), gevent (1.4.0), lxml (4.5.0), langdetect (1.0.8). Includes dependencies urllib3, chardet, certifi, idna, soupsieve, greenlet. - Updated 2020-09-22-23:59",
+        "CompatibleRuntimes": [
+          "python3.7"
+        ]
+      },
+      "DeletionPolicy": "Retain"
+    },
+    "RequestsWildLambdaLayerPermission": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": {
+          "Ref": "RequestsLambdaLayer5572a2eb37fc53d49d35f79b9f9554b1b22ac5ce"
+        },
+        "Principal": "*"
+      }
+    },
+    "NewsLambdaLayera54991d4ff5489adb3865a71ffa8bb93dd09ea81": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "Content": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/layers-stack/prod/1600844397633-2020-09-23T06:59:57.633Z/news.zip"
+        },
+        "LayerName": "news",
+        "Description": "Python 3.7; newspaper3k (0.2.8), newscatcher (0.1.0). Buncha dependencies. - Updated 2020-09-22-23:59",
+        "CompatibleRuntimes": [
+          "python3.7"
+        ]
+      },
+      "DeletionPolicy": "Retain"
+    },
+    "NewsWildLambdaLayerPermission": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": {
+          "Ref": "NewsLambdaLayera54991d4ff5489adb3865a71ffa8bb93dd09ea81"
+        },
+        "Principal": "*"
+      }
+    },
+    "PandasLambdaLayer2ae634d18c5c86bebf53f9959563c73de42fa379": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "Content": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/layers-stack/prod/1600844397633-2020-09-23T06:59:57.633Z/pandas.zip"
+        },
+        "LayerName": "Pandas-Numpy",
+        "Description": "Pandas 1.0.1 with Python 3.7. Includes dependencies Numpy (1.13.3) and Pytz (2019.3). - Updated 2020-09-22-23:59",
+        "CompatibleRuntimes": [
+          "python3.7"
+        ]
+      },
+      "DeletionPolicy": "Retain"
+    },
+    "PandasWildLambdaLayerPermission": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": {
+          "Ref": "PandasLambdaLayer2ae634d18c5c86bebf53f9959563c73de42fa379"
+        },
+        "Principal": "*"
+      }
+    },
+    "SeleniumLambdaLayer66285eadc8531345612a48e423233bfda4e7cb59": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "Content": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/layers-stack/prod/1600844397633-2020-09-23T06:59:57.633Z/selenium.zip"
+        },
+        "LayerName": "Selenium",
+        "Description": "Python 3.7; Selenium (3.141.0), ChromeDriver (2.37), Serverless Chrome (v1.0.0.41) - Updated 2020-09-22-23:59",
+        "CompatibleRuntimes": [
+          "python3.7"
+        ]
+      },
+      "DeletionPolicy": "Retain"
+    },
+    "SeleniumWildLambdaLayerPermission": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": {
+          "Ref": "SeleniumLambdaLayer66285eadc8531345612a48e423233bfda4e7cb59"
+        },
+        "Principal": "*"
+      }
+    }
+  },
+  "Outputs": {
+    "ServerlessDeploymentBucketName": {
+      "Value": {
+        "Ref": "ServerlessDeploymentBucket"
+      }
+    },
+    "MonitoringLambdaLayerQualifiedArn": {
+      "Description": "Current Lambda layer version",
+      "Value": {
+        "Ref": "MonitoringLambdaLayer76581eb844ece035f21538502452cded967d3459"
+      }
+    },
+    "MonitoringLambdaLayerHash": {
+      "Description": "Current Lambda layer hash",
+      "Value": "76581eb844ece035f21538502452cded967d3459"
+    },
+    "MonitoringLambdaLayerS3Key": {
+      "Description": "Current Lambda layer S3Key",
+      "Value": "serverless/layers-stack/prod/1600844397633-2020-09-23T06:59:57.633Z/monitoring.zip"
+    },
+    "SocialUnderscoreplatformUnderscorewrappersLambdaLayerQualifiedArn": {
+      "Description": "Current Lambda layer version",
+      "Value": {
+        "Ref": "SocialUnderscoreplatformUnderscorewrappersLambdaLayerb0c78a81924831195a38070479ef30252488c613"
+      }
+    },
+    "SocialUnderscoreplatformUnderscorewrappersLambdaLayerHash": {
+      "Description": "Current Lambda layer hash",
+      "Value": "b0c78a81924831195a38070479ef30252488c613"
+    },
+    "SocialUnderscoreplatformUnderscorewrappersLambdaLayerS3Key": {
+      "Description": "Current Lambda layer S3Key",
+      "Value": "serverless/layers-stack/prod/1600844397633-2020-09-23T06:59:57.633Z/social_platform_wrappers.zip"
+    },
+    "DatabasesLambdaLayerQualifiedArn": {
+      "Description": "Current Lambda layer version",
+      "Value": {
+        "Ref": "DatabasesLambdaLayer97bddd094578b95ef0d17b8649a8455ccaad2f6a"
+      }
+    },
+    "DatabasesLambdaLayerHash": {
+      "Description": "Current Lambda layer hash",
+      "Value": "97bddd094578b95ef0d17b8649a8455ccaad2f6a"
+    },
+    "DatabasesLambdaLayerS3Key": {
+      "Description": "Current Lambda layer S3Key",
+      "Value": "serverless/layers-stack/prod/1600844397633-2020-09-23T06:59:57.633Z/databases.zip"
+    },
+    "GoogleDashauthLambdaLayerQualifiedArn": {
+      "Description": "Current Lambda layer version",
+      "Value": {
+        "Ref": "GoogleDashauthLambdaLayer56e5741cdbe80707581ed9360be1ffe9b01b4223"
+      }
+    },
+    "GoogleDashauthLambdaLayerHash": {
+      "Description": "Current Lambda layer hash",
+      "Value": "56e5741cdbe80707581ed9360be1ffe9b01b4223"
+    },
+    "GoogleDashauthLambdaLayerS3Key": {
+      "Description": "Current Lambda layer S3Key",
+      "Value": "serverless/layers-stack/prod/1600844397633-2020-09-23T06:59:57.633Z/google-auth.zip"
+    },
+    "RequestsLambdaLayerQualifiedArn": {
+      "Description": "Current Lambda layer version",
+      "Value": {
+        "Ref": "RequestsLambdaLayer5572a2eb37fc53d49d35f79b9f9554b1b22ac5ce"
+      }
+    },
+    "RequestsLambdaLayerHash": {
+      "Description": "Current Lambda layer hash",
+      "Value": "5572a2eb37fc53d49d35f79b9f9554b1b22ac5ce"
+    },
+    "RequestsLambdaLayerS3Key": {
+      "Description": "Current Lambda layer S3Key",
+      "Value": "serverless/layers-stack/prod/1600844397633-2020-09-23T06:59:57.633Z/requests.zip"
+    },
+    "NewsLambdaLayerQualifiedArn": {
+      "Description": "Current Lambda layer version",
+      "Value": {
+        "Ref": "NewsLambdaLayera54991d4ff5489adb3865a71ffa8bb93dd09ea81"
+      }
+    },
+    "NewsLambdaLayerHash": {
+      "Description": "Current Lambda layer hash",
+      "Value": "a54991d4ff5489adb3865a71ffa8bb93dd09ea81"
+    },
+    "NewsLambdaLayerS3Key": {
+      "Description": "Current Lambda layer S3Key",
+      "Value": "serverless/layers-stack/prod/1600844397633-2020-09-23T06:59:57.633Z/news.zip"
+    },
+    "PandasLambdaLayerQualifiedArn": {
+      "Description": "Current Lambda layer version",
+      "Value": {
+        "Ref": "PandasLambdaLayer2ae634d18c5c86bebf53f9959563c73de42fa379"
+      }
+    },
+    "PandasLambdaLayerHash": {
+      "Description": "Current Lambda layer hash",
+      "Value": "2ae634d18c5c86bebf53f9959563c73de42fa379"
+    },
+    "PandasLambdaLayerS3Key": {
+      "Description": "Current Lambda layer S3Key",
+      "Value": "serverless/layers-stack/prod/1600844397633-2020-09-23T06:59:57.633Z/pandas.zip"
+    },
+    "SeleniumLambdaLayerQualifiedArn": {
+      "Description": "Current Lambda layer version",
+      "Value": {
+        "Ref": "SeleniumLambdaLayer66285eadc8531345612a48e423233bfda4e7cb59"
+      }
+    },
+    "SeleniumLambdaLayerHash": {
+      "Description": "Current Lambda layer hash",
+      "Value": "66285eadc8531345612a48e423233bfda4e7cb59"
+    },
+    "SeleniumLambdaLayerS3Key": {
+      "Description": "Current Lambda layer S3Key",
+      "Value": "serverless/layers-stack/prod/1600844397633-2020-09-23T06:59:57.633Z/selenium.zip"
+    }
+  }
+}
